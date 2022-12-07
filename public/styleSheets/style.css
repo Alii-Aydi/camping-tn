@@ -1,0 +1,46 @@
+.results {
+    padding: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.results ul {
+    margin: 0;
+    padding: 0;
+}
+
+.results ul li {
+    list-style: none;
+    border-radius: 3px;
+    background: whitesmoke;
+    opacity: 0;
+    display: none;
+    padding: 8px 12px;
+    transition: all .5s linear;
+}
+
+.show .results ul li {
+    opacity: 1;
+    display: block;
+}
+
+.show .results {
+    padding: 10px;
+}
+
+.results ul li:hover {
+    background: lightgray;
+}
+
+.wrapper {
+    background: whitesmoke;
+    position: relative;
+}
+
+/* index */
+
+.navPage {
+    text-align: center;
+}

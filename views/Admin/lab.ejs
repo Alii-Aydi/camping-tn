@@ -1,0 +1,61 @@
+<% layout('layout/Adminboilerplate') %>
+    <h1 class="display-4 mb-3 mt-4 text-center">
+        <%= title %> dashbord
+    </h1>
+    <form action="" method="post">
+        <nav class="d-flex w-25 ml-3 mb-3">
+            <select name="select" class="custom-select">
+                <option value="accept">Accept</option>
+                <option value="delete">Delete</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-success">Applie</button>
+        </nav>
+        <% for( let campground of campgrounds ) { %>
+            <% if (campground.state==='pending' ) { %>
+                <label class="d-flex">
+                    <input type="checkbox" name="deleteCamp[]" value="<%= campground._id %>">
+                    <div class="card mb-3 w-100">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <% if (campground.img.length) { %>
+                                    <img class="img-fluid" src="<%= campground.img[0].url %> " alt="">
+                                    <% } else{ %>
+                                        <img class="img-fluid" src="..." alt="">
+                                        <% } %>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%= campground.title %>
+                                    </h5>
+                                    <p class="card-text">
+                                        <%= campground.description %>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            <%= campground.location %>
+                                        </small>
+                                    </p>
+                                    <a class="btn btn btn-primary" href="/Admin/showlab/<%= campground.id %>">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                <% } %>
+                    <% } %>
+    </form>
+
+    <script>
+        const select = document.querySelector('select')
+        const form = document.querySelector('form')
+        form.action = '/Admin/pendingPosts/applie?_method=patch'
+        select.addEventListener('change', () => {
+            if (select.value === 'delete') {
+                form.action = '/Admin/pendingPosts/applie?_method=delete'
+                console.log(form.action)
+            } else if (select.value === 'accept') {
+                form.action = '/Admin/pendingPosts/applie?_method=patch'
+            }
+        })
+    </script>

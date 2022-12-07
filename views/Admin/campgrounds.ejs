@@ -1,0 +1,56 @@
+<% layout('layout/Adminboilerplate') %>
+    <h1 class="display-4 mb-3 mt-4 text-center">
+        <%= title %> dashbord
+    </h1>
+    <form action="/Admin/campgrounds/applie" method="post">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="d-flex" scope="col"><select class="custom-select">
+                            <option value="delete">Delete</option>
+                        </select> <button type="submit" class="btn btn-sm btn-success">Applie</button></th>
+                    <th scope="col">id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for( let camp of camps ) { %>
+                    <tr>
+                        <th scope="row">
+                            <input type="checkbox" name="deleteCamp[]" value="<%= camp._id %>">
+                        </th>
+                        <th>
+                            <%= camp._id %>
+                        </th>
+                        <td>
+                            <a href="/campgrounds/<%= camp._id %>">
+                                <%= camp.title %>
+                            </a>
+                        </td>
+                        <td>
+                            <%= camp.location %>
+                        </td>
+                        <td>
+                            <%= camp.price %>
+                        </td>
+                        <td>
+                            <a href="/profile/<%= camp.author._id %> ">
+                                <%= camp.author.username %>
+                            </a>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+        const select = document.querySelector('select').value
+        const form = document.querySelector('form')
+        if (select === 'delete') {
+            form.action = '/Admin/campgrounds/applie?_method=delete'
+        }
+    </script>

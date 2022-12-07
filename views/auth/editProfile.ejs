@@ -1,0 +1,59 @@
+<% layout('layout/boilerplate') %>
+    <div class="text-center">
+        <form action="/profile/<%= user._id %>?_method=patch " method="post" novalidate enctype="multipart/form-data">
+            <% if (!user.img.url) { %>
+                <img class="mb-3 rounded-circle" style="height: 200px;"
+                    src="https://cdn-icons-png.flaticon.com/512/1106/1106631.png?w=740&t=st=1663286431~exp=1663287031~hmac=0c98215c6ea707c05756af831e5b3f0ad82ddf56e7f4e514a799e326a8b6376e"
+                    alt="">
+                <% }else{ %>
+                    <img class="mb-3 rounded-circle" style="height: 200px;" src="<%= user.img.url %> " alt="">
+                    <% } %>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="img" name="img">
+                            <label class="custom-file-label" for="img">Choose profile image</label>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <h1 class="display-4">Profile infos</h1>
+                        <div class="text-left">
+                            <div class="mb-3 w-50">
+                                <label class="form-label" for="username">username</label>
+                                <input class="form-control user" value="<%= user.username %>" type="text" id="username"
+                                    name="username" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 w-50">
+                                <label class="form-label" for="email">New email</label>
+                                <input class="form-control" value="<%= user.email %>" type="email" id="email"
+                                    name="email" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="custom-control custom-checkbox mb-3 mt-5">
+                                <input class="custom-control-input ckb" type="checkbox" id="i">
+                                <label class="custom-control-label" for="i">Change password ?</label>
+                            </div>
+                            <div class="mb-3 w-50">
+                                <label class="form-label" for="oldpassword">Old password</label>
+                                <input class="form-control pw" type="password" id="oldpassword" name="Oldpassword"
+                                    required disabled>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 w-50">
+                                <label class="form-label" for="password">New password</label>
+                                <input class="form-control pw" type="password" id=" password" name="password" required
+                                    disabled>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info mb-3">Save</button>
+                        </div>
+        </form>
+    </div>

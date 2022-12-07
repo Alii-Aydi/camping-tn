@@ -1,0 +1,60 @@
+<% layout('layout/Adminboilerplate') %>
+    <h1 class="display-4 mb-3 mt-4 text-center">
+        <%= title %> dashbord
+    </h1>
+    <form action="/Admin/reviews/applie" method="post">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="d-flex" scope="col"><select class="custom-select">
+                            <option value="delete">Delete</option>
+                        </select> <button type="submit" class="btn btn-sm btn-success">Applie</button></th>
+                    <th scope="col">id</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">post</th>
+                    <th scope="col">Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for( let rev of revs ) { %>
+                    <tr>
+                        <th scope="row">
+                            <input type="checkbox" name="deleteRev[]" value="<%= rev._id %>">
+                        </th>
+                        <th>
+                            <%= rev._id %>
+                        </th>
+                        <td>
+                            <%= rev.rating %>
+                        </td>
+                        <td class="descreption">
+                            <p>
+                                <%=rev.description%>
+                            </p>
+                        </td>
+                        <td>
+                            <% if (rev.post) { %>
+                                <a href="/campgrounds/<%= rev.post._id %> ">
+                                    <%= rev.post.title %>
+                                </a>
+                                <% } %>
+                        </td>
+                        <td>
+                            <a href="/profile/<%= rev.author._id %> ">
+                                <%= rev.author.username %>
+                            </a>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+        const select = document.querySelector('select').value
+        const form = document.querySelector('form')
+        if (select === 'delete') {
+            form.action = '/Admin/reviews/applie?_method=delete'
+        }
+    </script>

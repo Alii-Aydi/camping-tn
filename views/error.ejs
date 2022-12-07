@@ -1,0 +1,20 @@
+<% layout('layout/boilerplate') %>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">
+            <%= err.message %>
+        </h4>
+        <% if (process.env.NODE_ENV !="production" ) { %>
+            <p>
+                <%= err.stack %>
+            </p>
+            <% } %>
+                <hr>
+                <p class="mb-0"><a href="#">Back</a></p>
+    </div>
+
+    <script>
+        let btn = document.querySelector('p a')
+        btn.addEventListener('click', () => {
+            window.history.back()
+        })
+    </script>

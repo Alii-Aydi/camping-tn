@@ -1,0 +1,54 @@
+<% layout('layout/Adminboilerplate') %>
+    <h1 class="display-4 mb-3 mt-4 text-center">
+        <%= title %> dashbord
+    </h1>
+    <form action="/Admin/users/applie" method="post">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="d-flex" scope="col"><select class="custom-select">
+                            <option value="delete">Delete</option>
+                        </select> <button type="submit" class="btn btn-sm btn-success">Applie</button></th>
+                    <th scope="col">id</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">N°posts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let i=0 %>
+                    <% for( let user of users) { %>
+                        <tr>
+                            <th scope="row">
+                                <input type="checkbox" name="deleteUser[]" value="<%= user._id %>">
+                            </th>
+                            <th>
+                                <%= user._id %>
+                            </th>
+                            <td>
+                                <%= user.username %>
+                            </td>
+                            <td>
+                                <%= user.email %>
+                            </td>
+                            <td>
+                                <%= user.role %>
+                            </td>
+                            <td>
+                                <%= nbrArray[i] %> <a href="/profile/<%= user._id %> "> view</a>
+                            </td>
+                        </tr>
+                        <% i++ %>
+                            <% } %>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+        const select = document.querySelector('select').value
+        const form = document.querySelector('form')
+        if (select === 'delete') {
+            form.action = '/Admin/users/applie?_method=delete'
+        }
+    </script>

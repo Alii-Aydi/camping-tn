@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><img src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
+            width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy"> Avantires-tn</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/campgrounds?page=1&limit=3">All campgrounds</a>
+            <a class="nav-link" href="/campgrounds/new">Add campground</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <% if (currentUser) { %>
+                <% if (currentUser.role==="Admin" ) { %>
+                    <a class="nav-link" href="/Admin">Dashbord</a>
+                    <% } %>
+                        <% } %>
+                            <% if (!currentUser) { %>
+                                <a class="nav-link" href="/login">login</a>
+                                <a class="nav-link" href="/register">Register</a>
+                                <% }else {%>
+                                    <a class="nav-link" href="/profile/<%= currentUser._id %>">
+                                        <i class="fa-solid fa-user"></i>
+                                        <%= currentUser.username %>
+                                    </a>
+                                    <a class="nav-link" href="/logout">Logout</a>
+                                    <% } %>
+        </div>
+
+    </div>
+</nav>
+
+<script src="/scripts/activeNavLinks.js"></script>
