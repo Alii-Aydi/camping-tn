@@ -46,12 +46,13 @@ module.exports = {
         campground.geometry = geoData.body.features[0].geometry
         campground.img = req.files.map(el => ({ url: el.path, filename: el.filename }))
         campground.author = req.user._id
-        await campground.save()
         if (req.user.role === 'Admin') {
             campground.state = 'verified'
+            await campground.save()
             req.flash('success', 'Successfully made a new campground')
             res.redirect(`/campgrounds/${campground._id}`)
         }
+        await campground.save()
         req.flash('success', 'Successfully made a new campground .Your campground will be added after the confirmation of the Administration')
         res.redirect(`/campgrounds/${campground._id}`)
     },

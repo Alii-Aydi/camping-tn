@@ -1,65 +1,67 @@
 <% layout('layout/boilerplate') %>
-    <div class="text-center">
-        <% if (!user.img.url) { %>
-            <img class="mb-3 rounded-circle" style="height: 200px;"
-                src="https://cdn-icons-png.flaticon.com/512/1106/1106631.png?w=740&t=st=1663286431~exp=1663287031~hmac=0c98215c6ea707c05756af831e5b3f0ad82ddf56e7f4e514a799e326a8b6376e"
-                alt="">
-            <% }else{ %>
-                <img class="mb-3 rounded-circle" style="height: 200px;" src="<%= user.img.url %> " alt="">
-                <% } %>
-                    <h1 class="display-4">Profile infos</h1>
-                    <p>Username: <%= user.username %>
-                    </p>
-                    <p>Email: <%= user.email %>
-                    </p>
-                    <% if (currentUser) { %>
-                        <% if (user._id.toString().trim()===currentUser._id.toString().trim()) { %>
-                            <a href="/profile/<%= user._id %>/edit " class="btn btn-info mb-3">Edit</a>
-                            <% } else { %>
-                                <button class="btn btn-success mb-3">Contact</button>
-                                <% } %>
-                                    <% } else { %>
-                                        <button class="btn btn-success mb-3">Contact</button>
-                                        <% } %>
-                                            <hr>
-                                            <h1 class="display-4 text-left mt-5 mb-5">All <%=
-                                                    (user._id.toString().trim()===currentUser._id.toString().trim())?'your':user.username
-                                                    %> posts :
-                                            </h1>
-                                            <% for( let campground of campgrounds ) { %>
-                                                <div class="card mb-3 text-left">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <% if (campground.img.length) { %>
-                                                                <img class="img-fluid"
-                                                                    src="<%= campground.img[0].url %> " alt="">
-                                                                <% } else{ %>
-                                                                    <img class="img-fluid" src="..." alt="">
-                                                                    <% } %>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <div class="card-body">
-                                                                <h5 class="card-title">
-                                                                    <%= campground.title %>
-                                                                </h5>
-                                                                <p class="card-text">
-                                                                    <%= campground.description %>
-                                                                </p>
-                                                                <p class="card-text">
-                                                                    <small class="text-muted">
-                                                                        <%= campground.location %>
-                                                                    </small>
-                                                                </p>
-                                                                <p class="card-text">
-                                                                    <small class="text-muted">
-                                                                        <%= campground.state %>
-                                                                    </small>
-                                                                </p>
-                                                                <a class="btn btn btn-primary"
-                                                                    href="/campgrounds/<%= campground.id %>">View</a>
+    <div class="container mt-5">
+        <div class="text-center">
+            <% if (!user.img.url) { %>
+                <img class="mb-3 rounded-circle" style="height: 200px;"
+                    src="https://cdn-icons-png.flaticon.com/512/1106/1106631.png?w=740&t=st=1663286431~exp=1663287031~hmac=0c98215c6ea707c05756af831e5b3f0ad82ddf56e7f4e514a799e326a8b6376e"
+                    alt="">
+                <% }else{ %>
+                    <img class="mb-3 rounded-circle" style="height: 200px;" src="<%= user.img.url %> " alt="">
+                    <% } %>
+                        <h1 class="display-4">Profile infos</h1>
+                        <p>Username: <%= user.username %>
+                        </p>
+                        <p>Email: <%= user.email %>
+                        </p>
+                        <% if (currentUser) { %>
+                            <% if (user._id.toString().trim()===currentUser._id.toString().trim()) { %>
+                                <a href="/profile/<%= user._id %>/edit " class="btn btn-info mb-3">Edit</a>
+                                <% } else { %>
+                                    <button class="btn btn-success mb-3">Contact</button>
+                                    <% } %>
+                                        <% } else { %>
+                                            <button class="btn btn-success mb-3">Contact</button>
+                                            <% } %>
+                                                <hr>
+                                                <h1 class="display-4 text-left mt-5 mb-5">All <%=
+                                                        (user._id.toString().trim()===currentUser._id.toString().trim())?'your':user.username
+                                                        %> posts :
+                                                </h1>
+                                                <% for( let campground of campgrounds ) { %>
+                                                    <div class="card mb-3 text-left">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <% if (campground.img.length) { %>
+                                                                    <img class="img-fluid indexImg"
+                                                                        src="<%= campground.img[0].url %> " alt="">
+                                                                    <% } else{ %>
+                                                                        <img class="img-fluid" src="..." alt="">
+                                                                        <% } %>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">
+                                                                        <%= campground.title %>
+                                                                    </h5>
+                                                                    <p class="card-text">
+                                                                        <%= campground.description %>
+                                                                    </p>
+                                                                    <p class="card-text">
+                                                                        <small class="text-muted">
+                                                                            <%= campground.location %>
+                                                                        </small>
+                                                                    </p>
+                                                                    <p class="card-text">
+                                                                        <small class="text-muted">
+                                                                            <%= campground.state %>
+                                                                        </small>
+                                                                    </p>
+                                                                    <a class="btn btn btn-primary"
+                                                                        href="/campgrounds/<%= campground.id %>">View</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <% } %>
+                                                    <% } %>
+        </div>
     </div>

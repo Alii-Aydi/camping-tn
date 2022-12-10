@@ -126,6 +126,11 @@ const profiles = require('./routes/profilesRoutes')
 app.use("/profile", profiles)
 
 
+//Shop routs
+
+const shop = require('./routes/shopRouts')
+app.use("/shop", shop)
+
 //Api
 
 app.get('/getcamp/:id', async (req, res) => {
