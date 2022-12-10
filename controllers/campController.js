@@ -50,7 +50,7 @@ module.exports = {
             campground.state = 'verified'
             await campground.save()
             req.flash('success', 'Successfully made a new campground')
-            res.redirect(`/campgrounds/${campground._id}`)
+            return res.redirect(`/campgrounds/${campground._id}`)
         }
         await campground.save()
         req.flash('success', 'Successfully made a new campground .Your campground will be added after the confirmation of the Administration')
