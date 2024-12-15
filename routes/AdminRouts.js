@@ -9,23 +9,34 @@ const Review = require('../models/review')
 const { cloudinary } = require('../cloudinary/cloud')
 
 router.get('/users', isLoggedIn, isAdmin, async (req, res) => {
-    const users = await User.find({})
-    let i = 0
-    const nbrArray = []
-    let prom = new Promise((res, rej) => {
-        users.forEach(async (user, index, array) => {
-            const camps = await Campground.find({ author: user._id })
-            for (let camp of camps) {
-                i++
-            }
-            nbrArray.push(i)
-            i = 0
-            if (index === array.length - 1) res()
-        })
-    })
-    prom.then(() => {
-        return res.render('Admin/allusers', { users, title: "Users", nbrArray })
-    })
+    // const users = await User.find({})
+    // let i = 0
+    // const nbrArray = []
+    // let prom = new Promise((res, rej) => {
+    //     users.forEach(async (user, index, array) => {
+    //         const camps = await Campground.find({ author: user._id })
+    //         for (let camp of camps) {
+    //             i++
+    //         }
+    //         nbrArray.push(i)
+    //         i = 0
+    //         if (index === array.length - 1) res()
+    //     })
+    // })
+    // prom.then(() => {
+    //     return res.render('Admin/allusers', { users, title: "Users", nbrArray })
+    // })
+    const users = await User.find({});
+    // Use a map to asynchronously process all users
+    const userPromises = users.map(async (user) => {
+        const camps = await Campground.find({ author: user._id });
+        user.nbrP = camps.length
+    });
+
+    // Wait for all userPromises to complete
+    await Promise.all(userPromises);
+
+    return res.render('Admin/allusers', { users, title: "Users" });
 })
 
 router.all('/users/applie', isLoggedIn, isAdmin, async (req, res) => {
